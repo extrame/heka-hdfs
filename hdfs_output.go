@@ -86,7 +86,7 @@ type HDFSOutputConfig struct {
 
 	// Append to existed file or not
 
-	Append *bool `toml:"append"`
+	Append bool `toml:"append"`
 }
 
 func (hdfs *HDFSOutput) Init(config interface{}) (err error) {
@@ -153,6 +153,7 @@ func (hdfs *HDFSOutput) hdfsWrite(data []byte, fields map[string]string) (err er
 	}
 
 	if hdfs.Append {
+		var success bool
 		if success, err = hdfs.fs.Append(bytes.NewReader(data), webhdfs.Path{Name: path}, hdfs.Buffersize); success {
 			return
 		}
