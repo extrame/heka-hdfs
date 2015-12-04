@@ -191,7 +191,7 @@ func (hdfs *HDFSOutput) Run(or OutputRunner, h PluginHelper) (err error) {
 		for _, field := range pack.Message.Fields {
 			fieldMap[field.GetName()] = field.ValueString[0]
 		}
-		pack.Recycle()
+		pack.Recycle(e)
 		if e != nil {
 			or.LogError(e)
 			continue
